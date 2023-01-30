@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: producer
+  labels:
+    app: producer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: producer
+  template:
+    metadata:
+      labels:
+        app: producer
+    spec:
+      containers:
+        - name: producer
+          image: neuhausmatheus/producer:v2.0.1
+          env:
+            - name: PRODUCER_CONTEXT_PATH
+              value: /producer
+            - name: PRODUCER_PORT
+              value: "8989"
+            - name: KAFKA_HOST_PORT
+              value: my-kafka-0.my-kafka-headless.default.svc.cluster.local:9092
+            - name: KAFKA_TOPIC
+              value: kafka
+            - name: RABBITMQ_HOST
+              value: my-rabbitmq.default.svc.cluster.local
+            - name: RABBITMQ_PASSWORD
+              value: matheus
+            - name: RABBITMQ_PORT
+              value: "5672"
+            - name: RABBITMQ_USER
+              value: matheus
+            - name: RABBITMQ_EXCHANGE
+              value: rabbitmq-exchange
+            - name: RABBITMQ_QUEUE
+              value: rabbitmq-queue
+            - name: RABBITMQ_ROUTING_KEY
+              value: rabbitmq-route-key
+          ports:
+            - containerPort: 8989
+              name: tcp
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: producer
+spec:
+  selector:
+    app: producer
+  ports:
+    - name: tcp
+      protocol: TCP
+      port: 8989
+      targetPort: tcp
