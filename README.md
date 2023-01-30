@@ -23,4 +23,4 @@ Docker Image for Producer: docker pull neuhausmatheus/producer:v2.0.1
 Docker Image for Consumer: docker pull neuhausmatheus/consumer:v2.0.1
 
 
-# Please, let me know anything that should be great to improve!
+# Take a look into "screenshot" folder to have an idea of what we have here!
