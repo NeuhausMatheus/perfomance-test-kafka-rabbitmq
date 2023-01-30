@@ -1,4 +1,4 @@
-# Perfomance Test for Kafka and RabbitMQ
+# Perfomance Test for Kafka and RabbitMQ + WebUI interface
 
 Perfomance Test for Kafka + RabbitMQ written in Java with Env.Variables for Kubernetes following Twelve-Factor App methodology
 to segregate server configuration from app.
